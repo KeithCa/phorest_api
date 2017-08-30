@@ -11,11 +11,11 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../phorest_voucher_api1/dependencies" />
+          <root url="file://$MODULE_DIR$/dependencies" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
-        <jarDirectory url="file://$MODULE_DIR$/../phorest_voucher_api1/dependencies" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/dependencies" recursive="false" />
       </library>
     </orderEntry>
   </component>
