@@ -89,17 +89,17 @@ public class View_Controller implements Initializable {
     @FXML
     private void handleButtonAction(ActionEvent event) throws Exception {
         if (event.getSource() == createVoucher) {
-            System.out.println(voucher_client.getString("clientId"));
 
+            String var = voucher_client.getString("clientId");
+            System.out.println(var);
             HttpResponse<JsonNode> response = Unirest.post(base_url).basicAuth(username, password).header("accept", "application/json")
                     .header("Content-Type", "application/json")
-                    .body("{\"clientId\":\"value\", \"creatingBranchId\":\"bar\", \"expiryDate\" : \"something\" " +
-                            ", \"issueDate\":\"bar\", [\"links\"{\"href\":\"string\"" +
-                            ", \"rel\":\"string\", \"creatingBranchId\":\"bar\"}], \"originalBalance\":\"bar\"," +
-                            "\"serialNumber\":\"value\", \"voucherID\":\"bar\"}")
+                    .body("{\"clientId\": \""+var+"\", \"creatingBranchId\": \"SE-J0emUgQnya14mOGdQS\",\"expiryDate\": \"2017-08-29T21:05:32.461Z\",\"issueDate\": \"2017-08-29T21:05:32.461Z\",\"links\": [ {\"href\": \"string\",\"rel\": \"string\",\"templated\": true }],\"originalBalance\": 123.12,\"serialNumber\": \"463333\",\"voucherId\": \"ab-463\" }")
                     .asJson();
+            JSONObject body = response.getBody().getObject();
             String status = response.getBody().getObject().getString("detail");
             System.out.println(status);
+            System.out.println(body);
         }
 
     }
