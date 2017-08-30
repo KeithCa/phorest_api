@@ -48,12 +48,13 @@ public class Controller {
         Stage stage;
         Parent root;
         Controller client = new Controller();
-        String search = searchField.getText();
+
 
         if(event.getSource() == searchBtn) {
-
+            String search = searchField.getText();
             String choice = choices.getSelectionModel().getSelectedItem().toString();
-            if(choice == "Phone Number"){
+            if(choice.equals("Phone Number")){
+                System.out.println(search);
                 client.getClientsbyPhone(search);
             }
             else {
