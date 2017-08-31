@@ -6,20 +6,16 @@ import com.mashape.unirest.http.Unirest;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.JavaFXBuilderFactory;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.net.URL;
 
 
 public class Controller {
@@ -46,8 +42,8 @@ public class Controller {
 
         HttpResponse<JsonNode> response = Unirest.get(base_url).basicAuth(username, password).
                 queryString("phone", phone_no).
-                asJson();
-        responses = response.getBody().getObject().getJSONObject("_embedded");
+                asJson(); //would've liked to store this as an object but didn't think I would've had time.
+        responses = response.getBody().getObject().getJSONObject("_embedded"); //store object "_embedded" in JSONObject
         //Using unirest to call API with query parameter phone
         return responses;
     }
@@ -67,7 +63,7 @@ public class Controller {
         Controller client = new Controller();
         JSONObject response;
 
-        if (event.getSource() == searchBtn) {
+        if (event.getSource() == searchBtn) { //get field from dropdown for search
             String search = searchField.getText();
             String choice = choices.getSelectionModel().getSelectedItem().toString();
             if (choice.equals("Phone Number")) {
@@ -75,7 +71,7 @@ public class Controller {
             } else {
                 response = client.getClientsbyEmail(search);
             }
-            JSONArray client1 = response.getJSONArray("clients");
+            JSONArray client1 = response.getJSONArray("clients"); //get array of all clients
 
 
             Stage primaryStage = new Stage();
@@ -83,7 +79,7 @@ public class Controller {
             primaryStage = (Stage)searchBtn.getScene().getWindow();
             Parent root= loader.load(getClass().getResource("viewFXML.fxml").openStream());
             View_Controller controller = loader.getController();
-            controller.setClients(client1);
+            controller.setClients(client1); //setting other scene to have access to the array of clients
             Scene scene= new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.show();
